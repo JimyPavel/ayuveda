@@ -29,6 +29,10 @@ hr {
     background-color: #ddd;
 }
 
+#wrapper{
+    width:960px;
+}
+
 #social{
     margin-bottom: 90px;
 }
