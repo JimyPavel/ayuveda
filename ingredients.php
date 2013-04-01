@@ -19,6 +19,20 @@
 	foreach($ingreds as $val){
 		$allValues = $allValues.$val."|";
 	}
+	
+	// we delete all data if the user wanted this
+	if(isset($_POST["deleteAll"])){
+		if(isset($_SESSION['allDishes'])){
+			unset($_SESSION['allDishes']);
+		}
+	}
+	
+	// we take the session dishes
+	$savedDishes = "";
+	if(isset($_SESSION['allDishes']) && $_SESSION['allDishes'] != "undefined"){
+		$savedDishes = $_SESSION['allDishes'];
+	}
+	
 ?>
 
 <html lang="en">
@@ -26,8 +40,7 @@
 	<meta charset="utf-8" />
     <title>Ayuveda</title>
     <link rel="stylesheet" href="css/jquery-ui.css" />
-    <script src="js/jquery-1.9.1.js"></script> 
-   <!-- <script src="js/jquery-1.7.1.min.js"></script> -->
+    <script src="js/jquery-1.9.1.js"></script>
     <script src="js/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css" />
 	
@@ -36,7 +49,6 @@
 	<link href="css/site.css" rel="stylesheet" type="text/css">
 	<link href="js/google-code-prettify/prettify.css" rel="stylesheet" type="text/css">
 
-	<script type="text/javascript" src="js/myScript.js"></script>
 	<script type="text/javascript" src="js/qrCode.js"></script>
 	
 	<script type="text/javascript" src="js/assets/jquery.mousewheel.min.js"></script>	
@@ -67,50 +79,10 @@
 	<body class="metrouicss" style="text-align:center" >
 		<div id="wrapper">
 			<input type='hidden' id='hiddenData' value="<?php echo $allValues ?>" />
-			<script>
-				var items = new Array();
-				var selectedItems = new Array();
-				var allDishes = new Array();
-				var text = document.getElementById("hiddenData").value;
-				var currentExpandedDish = -1;	// no dish is expanded
-				var editPanelDim = 0;
-				if (text != null && text != "") {
-					items = text.split("|");
-				}
-				
-				// autocomplete for the ingredients
-			  $(function() {
-				var availableTags = items;
-				$( "#tags" ).autocomplete({
-				  source: availableTags
-				});
-			  });
-			  
-			  // autocomplete for dish category
-			  var categoryItems = new Array();
-			  categoryItems[0] = "Pizza";
-			  categoryItems[1] = "Salads";
-			  categoryItems[2] = "Appetizers";
-			  categoryItems[3] = "Beverages";
-			  categoryItems[4] = "Chicken";
-			  categoryItems[5] = "Pasta";
-			  categoryItems[6] = "Seafood";
-			  categoryItems[7] = "Rib/Steaks";
-			  categoryItems[8] = "Burger/Sandwiches";
-			  categoryItems[9] = "Healty Options";
-			  categoryItems[10] = "Desserts";
-			  categoryItems[11] = "Drinks";
-			  categoryItems[12] = "Other";
-			  
-			  $(function() {
-				var availableTags = categoryItems;
-				$( "#category" ).autocomplete({
-				  source: availableTags
-				});
-			  });
-			  
-		  </script>
-		  
+			<input type='hidden' id='savedDishes' value="<?php echo $savedDishes ?>" />
+			
+			<script type="text/javascript" src="js/myScript.js"></script>
+			
 			<div style="float:left ; margin-top:190px ; height:300px; margin-left:20px"
 			id="navigationMenu">
 				<p >Navigation Menu</p>
@@ -119,14 +91,17 @@
 						<li class="sticker sticker-color-orange">
 							<form id="indexForm" method="post" action="index.php">
 								<input type="hidden" name="indexData" id="indexData" />
-								<a href = "javascript:{submitForm('indexForm')}">About us</a>
+								<a href = "javascript:{submitForm('indexForm','indexData')}">Why Ayuveda</a>
 							</form>
 						</li>
 						<li class="sticker sticker-color-green" style="background-color:green">
 							<a style="color:white" >Create menu</a>
 						</li>
 						<li class="sticker sticker-color-blue" >
-							<a href="team.php" >Our team</a>
+							<form id="teamForm" method="post" action="team.php">
+								<input type="hidden" name="teamData" id="teamData" />
+								<a href = "javascript:{submitForm('teamForm','teamData')}">Our Team</a>
+							</form>
 						</li>
 					</ul>
 				</div>
@@ -144,6 +119,8 @@
 							href="javascript:{exportPDF()}"><i class="icon-download"></i> Export to PDF</a>
 							<a id="deleteDish" style="visibility:collapse" 
 							href="javascript:{deleteDish()}"><i class="icon-remove"></i> Delete dish</a>
+							<a id="deleteDishes" 
+							href="javascript:{deleteAllDishes()}"><i class="icon-remove"></i> Delete all</a>
 						</li>
 					</ul>
 				</div>
@@ -239,6 +216,7 @@
 			</div>
 			<script>
 				editPanelDim = parseInt(document.getElementById("editContent").style.height);
+				loadViews();
 			</script>
 		</div>
 		

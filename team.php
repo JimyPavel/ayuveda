@@ -1,3 +1,14 @@
+<?php
+	require("Data.class.php");
+	
+	// we start the session
+	session_start();
+	
+	if(isset($_POST['teamData'])){
+		$_SESSION['allDishes'] = $_POST['teamData'];
+	}
+?>
+
 <html lang="en">
 
 	<head>
@@ -73,9 +84,6 @@
 									<div class="slide image" id="slide2">
 										<img src="images/liliana.jpg" />
 									</div>
-									<div class="slide image" id="slide3">
-										<img src="images/mihai.jpg" />
-									</div>
 									<div class="slide image" id="slide4">
 										<img src="images/laur.jpg" />
 									</div>
@@ -91,7 +99,7 @@
 							</div>
 						</div>
 						<div style="margin-top:-400px;margin-left:500px ; position:absolute">
-							<p> Polytechnic University of Bucharest</p>
+							<p>  University "POLITEHNICA" of Bucharest</p>
 							<p> <b>Romania</b></p>
 							<p> <i>Imagine Cup project 2013 </i></p>
 						</div>

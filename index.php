@@ -10,8 +10,9 @@
 	// store session data
 	$_SESSION['data']=$d;
 	
-	// we print the first item from the data
-	//echo $d->allIngredients[0];
+	if(isset($_POST['indexData'])){
+		$_SESSION['allDishes'] = $_POST['indexData'];
+	}
 ?>
 <html lang="en">
 
