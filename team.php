@@ -33,7 +33,7 @@
 		<script type="text/javascript" src="js/modern/calendar.js"></script>
 	</head>
 	
-	<body class="metrouicss" style="text-align:center" >
+	<body id="body" class="metrouicss" style="text-align:center;overflow:hidden" >
 		<div style="float:left ; margin-top:190px ; height:300px; margin-left:20px"
 		id="navigationMenu">
 			<p >Navigation Menu</p>
@@ -107,6 +107,7 @@
 				</div>
 			</div>
 		</div>
+		<script src="js/index.js" ></script>
 	</body>
 	
 </html>
