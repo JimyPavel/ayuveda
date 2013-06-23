@@ -1,14 +1,3 @@
-<?php
-	require("Data.class.php");
-	
-	// we start the session
-	session_start();
-	
-	if(isset($_POST['teamData'])){
-		$_SESSION['allDishes'] = $_POST['teamData'];
-	}
-?>
-
 <html lang="en">
 
 	<head>
@@ -33,7 +22,7 @@
 		<script type="text/javascript" src="js/modern/calendar.js"></script>
 	</head>
 	
-	<body id="body" class="metrouicss" style="text-align:center;overflow:hidden" >
+	<body class="metrouicss" style="text-align:center" >
 		<div style="float:left ; margin-top:190px ; height:300px; margin-left:20px"
 		id="navigationMenu">
 			<p >Navigation Menu</p>
@@ -84,6 +73,9 @@
 									<div class="slide image" id="slide2">
 										<img src="images/liliana.jpg" />
 									</div>
+									<div class="slide image" id="slide3">
+										<img src="images/mihai.jpg" />
+									</div>
 									<div class="slide image" id="slide4">
 										<img src="images/laur.jpg" />
 									</div>
@@ -99,7 +91,7 @@
 							</div>
 						</div>
 						<div style="margin-top:-400px;margin-left:500px ; position:absolute">
-							<p>  University "POLITEHNICA" of Bucharest</p>
+							<p> Polytechnic University of Bucharest</p>
 							<p> <b>Romania</b></p>
 							<p> <i>Imagine Cup project 2013 </i></p>
 						</div>
@@ -107,7 +99,6 @@
 				</div>
 			</div>
 		</div>
-		<script src="js/index.js" ></script>
 	</body>
 	
 </html>
