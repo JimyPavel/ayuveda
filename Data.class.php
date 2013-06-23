@@ -8,7 +8,7 @@
 		public function getContent(){
 		
 			$this->allIngredients = array();
-			$pageContents = HttpClient::quickGet('http://ayuvedb.cloudapp.net/Ingredient/export');
+			$pageContents = HttpClient::quickGet('http://ayuvedadb.cloudapp.net/Ingredient/export');
 			$ingred = explode("|",$pageContents);
 			foreach ($ingred as $value)
 			{
